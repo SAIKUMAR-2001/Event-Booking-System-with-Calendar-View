@@ -1,0 +1,56 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}{{ event.name }}{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <h2 class="card-title">{{ event.name }}</h2>
+            <div>
+                {% if user.is_staff %}
+                <a href="{% url 'event_edit' event.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'event_delete' event.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                <a href="{% url 'view_attendees' event.id %}" class="btn btn-sm btn-outline-info">View Attendees</a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <p class="text-muted"><i class="bi bi-calendar-event"></i> {{ event.date|date:"F j, Y H:i" }}</p>
+        
+        <div class="mb-3">
+            <span class="badge bg-{% if event.is_fully_booked %}danger{% else %}success{% endif %}">
+                {% if event.is_fully_booked %}Fully Booked{% else %}{{ event.available_slots }} slots available{% endif %}
+            </span>
+        </div>
+        
+        <p class="card-text">{{ event.description }}</p>
+        
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        
+        {% if user.is_authenticated %}
+        <div class="mt-4">
+            {% if user_has_booked %}
+            <form method="post" action="{% url 'cancel_booking' event.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Cancel Booking</button>
+            </form>
+            {% elif not event.is_fully_booked %}
+            <form method="post" action="{% url 'book_event' event.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </form>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="alert alert-warning mt-4">
+            Please <a href="{% url 'admin:login' %}?next={% url 'event_detail' event.id %}">login</a> to book this event.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{% url 'event_list' %}" class="btn btn-outline-secondary">Back to Events</a>
+{% endblock %}

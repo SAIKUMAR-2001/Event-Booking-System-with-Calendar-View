@@ -1,0 +1,45 @@
+{% extends 'booking/base.html' %}
+
+{% block title %}Attendees for {{ event.name }}{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Attendees for {{ event.name }}</h2>
+        <p class="text-muted"><i class="bi bi-calendar-event"></i> {{ event.date|date:"F j, Y H:i" }}</p>
+        
+        <div class="mb-3">
+            <span class="badge bg-info">
+                {{ bookings|length }} of {{ event.max_participants }} slots booked
+            </span>
+        </div>
+
+        {% if bookings %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.user.username }}</td>
+                        <td>{{ booking.booking_date|date:"M j, Y H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info">No attendees yet.</div>
+        {% endif %}
+
+        <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-secondary">
+            Back to Event
+        </a>
+    </div>
+</div>
+{% endblock %}
