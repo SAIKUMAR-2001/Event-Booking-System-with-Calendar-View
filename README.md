@@ -39,8 +39,8 @@ A full-featured event booking system built with **Django**. Users can book slots
 ---
 ## 📸 Screenshots
 
-### ✅ Home Page (Post List)
-![Home Page](screenshots/home.png)
+### ✅ Login Page 
+![Home Page](screenshots/Screenshot 2025-06-12 151747.png)
 
 ### 📝 Submit Post
 ![Submit Post](screenshots/submit_post.png)
