@@ -39,18 +39,18 @@ A full-featured event booking system built with **Django**. Users can book slots
 ---
 ## 📸 Screenshots
 
-### ✅ Signup Page 
+### Signup Page 
 ![Signup Page](screenshots/signup.png)
 
-### 📝 Submit Post
-![Submit Post](screenshots/submit_post.png)
+### Event Calender View
+![Event Calender](screenshots/even_calender.png)
 
-### 🔐 Login Page
-![Login](screenshots/login.png)
+### Event Booking View
+![Event Booking](screenshots/event_book.png)
 
-### 🧑‍💼 Admin Panel (Approve/Reject)
-![Admin Panel](screenshots/admin_panel.png)
+###  Home Page
+![Home Page](screenshots/home.png)
 
-### 💬 Comment Section
-![Comment](screenshots/comment.png)
+### Create Event
+![Comment](screenshots/create.png)
 
